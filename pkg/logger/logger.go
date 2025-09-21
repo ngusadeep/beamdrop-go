@@ -84,33 +84,33 @@ func (l *Logger) SetShowCaller(show bool) {
 }
 
 // Debug logs a debug message
-func (l *Logger) Debug(format string, v ...interface{}) {
+func (l *Logger) Debug(format string, v ...any) {
 	l.log(DEBUG, format, v...)
 }
 
 // Info logs an info message
-func (l *Logger) Info(format string, v ...interface{}) {
+func (l *Logger) Info(format string, v ...any) {
 	l.log(INFO, format, v...)
 }
 
 // Warn logs a warning message
-func (l *Logger) Warn(format string, v ...interface{}) {
+func (l *Logger) Warn(format string, v ...any) {
 	l.log(WARN, format, v...)
 }
 
 // Error logs an error message
-func (l *Logger) Error(format string, v ...interface{}) {
+func (l *Logger) Error(format string, v ...any) {
 	l.log(ERROR, format, v...)
 }
 
 // Fatal logs a fatal message and exits the program
-func (l *Logger) Fatal(format string, v ...interface{}) {
+func (l *Logger) Fatal(format string, v ...any) {
 	l.log(FATAL, format, v...)
 	os.Exit(1)
 }
 
 // log is the internal logging method
-func (l *Logger) log(level LogLevel, format string, v ...interface{}) {
+func (l *Logger) log(level LogLevel, format string, v ...any) {
 	if level < l.level {
 		return
 	}
@@ -187,23 +187,23 @@ func (l *Logger) log(level LogLevel, format string, v ...interface{}) {
 var defaultLogger = New()
 
 // Package-level functions for easy access
-func Debug(format string, v ...interface{}) {
+func Debug(format string, v ...any) {
 	defaultLogger.Debug(format, v...)
 }
 
-func Info(format string, v ...interface{}) {
+func Info(format string, v ...any) {
 	defaultLogger.Info(format, v...)
 }
 
-func Warn(format string, v ...interface{}) {
+func Warn(format string, v ...any) {
 	defaultLogger.Warn(format, v...)
 }
 
-func Error(format string, v ...interface{}) {
+func Error(format string, v ...any) {
 	defaultLogger.Error(format, v...)
 }
 
-func Fatal(format string, v ...interface{}) {
+func Fatal(format string, v ...any) {
 	defaultLogger.Fatal(format, v...)
 }
 
