@@ -30,11 +30,11 @@ type Logger struct {
 	level      LogLevel
 	showCaller bool
 	colors     struct {
-		debug *color.Color
-		info  *color.Color
-		warn  *color.Color
-		error *color.Color
-		fatal *color.Color
+		debug     *color.Color
+		info      *color.Color
+		warn      *color.Color
+		error     *color.Color
+		fatal     *color.Color
 		timestamp *color.Color
 		caller    *color.Color
 		message   *color.Color
@@ -126,13 +126,18 @@ func (l *Logger) log(level LogLevel, format string, v ...any) {
 	if l.showCaller {
 		_, file, line, ok := runtime.Caller(2) // 2 levels up the call stack
 		if ok {
-			// Shorten file path for better readability
-			parts := strings.Split(file, "/")
-			if len(parts) > 2 {
-				callerInfo = fmt.Sprintf("%s/%s:%d", 
-					parts[len(parts)-2], parts[len(parts)-1], line)
+			// Skip showing caller info if it's from the logger package itself
+			if strings.Contains(file, "/logger/logger.go") {
+				callerInfo = ""
 			} else {
-				callerInfo = fmt.Sprintf("%s:%d", file, line)
+				// Shorten file path for better readability
+				parts := strings.Split(file, "/")
+				if len(parts) > 2 {
+					callerInfo = fmt.Sprintf("%s/%s:%d",
+						parts[len(parts)-2], parts[len(parts)-1], line)
+				} else {
+					callerInfo = fmt.Sprintf("%s:%d", file, line)
+				}
 			}
 		}
 	}
