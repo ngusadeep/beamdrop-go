@@ -55,6 +55,10 @@ func StartServer(sharedDir string, flags config.Flags) {
 		io.Copy(w, file)
 	})
 
+	http.HandleFunc("/stats",func(w http.ResponseWriter, r *http.Request) {
+		
+	})
+
 	// File APIs
 	http.HandleFunc("/files", func(w http.ResponseWriter, r *http.Request) {
 		logger.Debug("Listing files from directory: %s", sharedDir)
