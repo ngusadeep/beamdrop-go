@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"go/version"
 
 	"github.com/tachRoutine/beamdrop-go/beam"
 	"github.com/tachRoutine/beamdrop-go/config"
@@ -16,6 +17,12 @@ func main() {
 	sharedDir := flag.String("dir", ".", "Directory to share files from")
 	noQR := flag.Bool("no-qr", false, "Disable QR code generation")
 	help := flag.Bool("h", false, "Show help message")
+	versionFlag := flag.Bool("v", false, "Show version information")
+
+	if *versionFlag {
+		logger.Info("beamdrop version: %s", config.VERSION)
+		return
+	}
 	flag.Parse()
 
 	flags := config.Flags{
