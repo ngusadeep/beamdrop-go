@@ -57,9 +57,10 @@ func StartServer(sharedDir string, flags config.Flags) {
 
 	http.HandleFunc("/stats",func(w http.ResponseWriter, r *http.Request) {
 		stats := ServerStats{ // using these dummy stats for now
-			TotalRequests: 10,
-			TotalDownloads: 7,
-			CreatedAt: time.Now(),
+			Requests: 10,
+			Downloads: 7,
+			Uploads: 3,
+			StartTime: time.Now(),
 		}
 
 		w.Header().Set("Content-Type", "application/json")
