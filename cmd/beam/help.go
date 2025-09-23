@@ -14,6 +14,8 @@ Options:
   -dir string
 		Directory to share files from (default ".")
   -h, --help
+  -v, --v 
+  		version
   --no-qr 
   		Disable QR code generation`
 }

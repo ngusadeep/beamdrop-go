@@ -2,25 +2,23 @@ package main
 
 import (
 	"flag"
-	"go/version"
 
 	"github.com/tachRoutine/beamdrop-go/beam"
 	"github.com/tachRoutine/beamdrop-go/config"
 	"github.com/tachRoutine/beamdrop-go/pkg/logger"
+	"github.com/tachRoutine/beamdrop-go/pkg/styles"
 )
 
 
 
 func main() {
-	logger.Info("Starting beamdrop application")
-
 	sharedDir := flag.String("dir", ".", "Directory to share files from")
 	noQR := flag.Bool("no-qr", false, "Disable QR code generation")
 	help := flag.Bool("h", false, "Show help message")
 	versionFlag := flag.Bool("v", false, "Show version information")
 
 	if *versionFlag {
-		logger.Info("beamdrop version: %s", config.VERSION)
+		styles.InfoStyle.Println("Beamdrop Version:", config.VERSION)
 		return
 	}
 	flag.Parse()
@@ -46,6 +44,8 @@ func main() {
 		return
 	}
 
+
+	logger.Info("Starting beamdrop application")
 	logger.Info("Starting server with shared directory: %s", *sharedDir)
 	beam.StartServer(*sharedDir, flags)
 }
