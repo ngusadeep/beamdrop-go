@@ -3,7 +3,10 @@
 run: build
 	./cmd/beam/beam
 
-build: deps
+build-ui:
+	cd ./static/frontend && bun install && bun run build
+
+build: deps build-ui
 	go build -o ./cmd/beam/beam ./cmd/beam
 
 dev:
