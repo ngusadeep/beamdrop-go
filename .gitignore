@@ -36,3 +36,12 @@ go.work.sum
 
 # binaries
 /cmd/beam/beam
+beam
+cmd/beam/beam
+**/beam
+# Any binary without extension in cmd directories
+cmd/*/*
+!cmd/*/*.go
+!cmd/*/*.md
+!cmd/*/*.txt
+!cmd/*/*.json
