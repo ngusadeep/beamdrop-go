@@ -35,7 +35,7 @@ func StartServer(sharedDir string, flags config.Flags) {
 		}
 
 		logger.Debug("Serving static file: %s", urlPath)
-		file, err := static.FrontendFiles.Open("frontend" + urlPath)
+		file, err := static.FrontendFiles.Open("frontend/dist" + urlPath)
 		if err != nil {
 			logger.Warn("Static file not found: %s", urlPath)
 			w.Header().Set("Content-Type", "application/json")
