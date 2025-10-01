@@ -4,7 +4,7 @@ import (
 	"embed"
 )
 
-//go:embed all:frontend*
+//go:embed all:frontend/dist
 var FrontendFiles embed.FS
 
 func init() {
