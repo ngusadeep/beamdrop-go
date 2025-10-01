@@ -18,3 +18,7 @@ func GetConfig() Config {
 		PORT: PORT,
 	}
 }
+
+func createConfigDir(){
+	
+}
