@@ -64,13 +64,13 @@ func createDefaultConfig() {
 		log.Fatalf("failed to create config file: %v", err)
 	}
 	defer file.Close()
-	
+
 	// Write a simple comment for now
 	_, err = file.WriteString("# BeamDrop Configuration\n")
 	if err != nil {
 		log.Fatalf("failed to write to config file: %v", err)
 	}
-	
+
 	log.Printf("Created default config file at: %s", ConfigPath)
 }
 
@@ -79,4 +79,3 @@ func loadExistingConfig() {
 	// In the future, you can parse the config file and load settings
 	log.Printf("Loading existing config from: %s", ConfigPath)
 }
-
