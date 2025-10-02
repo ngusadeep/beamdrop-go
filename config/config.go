@@ -39,14 +39,15 @@ func init() {
 		log.Fatalf("failed to get home directory: %v", err)
 	}
 	ConfigDir = filepath.Join(homeDir, ConfigDirName)
-	ConfigPath = filepath.Join(ConfigDir, "config.json")
+	ConfigPath = filepath.Join(ConfigDir, "beamdrop.db")
 
 	createConfigDir()
 
 	if _, err := os.Stat(ConfigPath); os.IsNotExist(err) {
-		createDefaultConfig()
+		createConfigDb()
 	} else {
-		loadExistingConfig()
+		// For now, just log that we're loading the existing config
+		log.Printf("Loading existing config from: %s", ConfigPath)
 	}
 }
 
@@ -56,26 +57,13 @@ func createConfigDir() {
 	}
 }
 
-func createDefaultConfig() {
-	// For now, we'll create an empty config file
-	// In the future, you can serialize the config struct to JSON/YAML
+func createConfigDb() {
 	file, err := os.Create(ConfigPath)
 	if err != nil {
 		log.Fatalf("failed to create config file: %v", err)
 	}
 	defer file.Close()
-
-	// Write a simple comment for now
-	_, err = file.WriteString("# BeamDrop Configuration\n")
-	if err != nil {
-		log.Fatalf("failed to write to config file: %v", err)
-	}
-
+	// TODO: Load initial settings
 	log.Printf("Created default config file at: %s", ConfigPath)
 }
 
-func loadExistingConfig() {
-	// For now, just log that we're loading the existing config
-	// In the future, you can parse the config file and load settings
-	log.Printf("Loading existing config from: %s", ConfigPath)
-}
